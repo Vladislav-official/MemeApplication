@@ -1,22 +1,44 @@
 package com.example.memeapplication.ui.gallery
 
 import androidx.lifecycle.*
-import com.example.memeapplication.ApiService
-import com.example.memeapplication.RetrofitBuild
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkRequest
+import com.example.memeapplication.ui.home.DaggerModule
+import com.example.memeapplication.ui.work_with_api.*
+import dagger.Provides
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 
 class GalleryViewModel : ViewModel() {
 
-    private var _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
+    private var allEntries = MutableLiveData<List<Entrie>>()
+
+    val entries: LiveData<List<Entrie>> = allEntries
+    private var retrofitBuild : RetrofitBuild? = null
+
+    fun initRetrofit(retrofitBuild: RetrofitBuild) { this.retrofitBuild = retrofitBuild }
+
+    val uploadWorkRequest: WorkRequest =
+        OneTimeWorkRequestBuilder<NotifyWork>()
+            .build()
+
+    fun getRandomApi() = viewModelScope.launch {
+        retrofitBuild!!.apisData.randomApi.collect { allApis ->
+            allEntries.value = allApis
+        }
+    }
+    fun getAllAPI() = viewModelScope.launch {
+        retrofitBuild!!.apisData.allApis.collect{
+            allApis -> allEntries.value = allApis
+        }
     }
 
-    val text: LiveData<String> = _text
-
-    fun getRandomAPI() = viewModelScope.launch {
-        _text.value = RetrofitBuild.apiService.getRandomAPI().entries.get(0).Description
-    }
+    //справкуа из общажития, справка с горисполкома в каком районе,
 }

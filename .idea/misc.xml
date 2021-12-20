@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/MemeApplication/app/src/main/res/layout/activity_main.xml" value="0.19114583333333332" />
+        <entry key="..\:/MemeApplication/app/src/main/res/layout/api_element.xml" value="0.5" />
         <entry key="..\:/MemeApplication/app/src/main/res/layout/app_bar_main.xml" value="0.19114583333333332" />
         <entry key="..\:/MemeApplication/app/src/main/res/layout/content_main.xml" value="0.17708333333333334" />
         <entry key="..\:/MemeApplication/app/src/main/res/layout/fragment_gallery.xml" value="0.19114583333333332" />
+        <entry key="..\:/MemeApplication/app/src/main/res/layout/fragment_home.xml" value="0.2617753623188406" />
       </map>
     </option>
   </component>

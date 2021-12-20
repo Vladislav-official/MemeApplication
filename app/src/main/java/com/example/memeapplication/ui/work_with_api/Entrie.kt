@@ -1,4 +1,4 @@
-package com.example.memeapplication
+package com.example.memeapplication.ui.work_with_api
 
 import com.google.gson.annotations.SerializedName
 
